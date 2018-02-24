@@ -7,16 +7,16 @@ Instructions for installing Apicurio on premise using OpenShift 3.7, RedHat SSO,
 Clone this project and change directory:
 
 ```
-cd Apicurio/openshift
+cd openshift
 ```
 
-Deploy onto an EAP-7.1 image in OpenShift, get the image as a cluster amdin:
+Deploy using an EAP-7.1 image in OpenShift, import the image as a cluster amdin:
 
 ```
 oc import-image registry.access.redhat.com/jboss-eap-7/eap71-openshift --confirm -n openshift
 ```
 
-As a normal user, create a project and a binary build from the `deployments/*.war` and `configuration` artefacts
+As a normal user, create a project and a binary build:
 
 ```
 oc new-project apicurio  --description='Apicurio' --display-name='Apicurio'
@@ -26,7 +26,7 @@ oc new-app apicurio
 oc expose svc/apicurio
 ```
 
-Create a SSO server:
+Create an SSO server:
 
 ```
 oc create -f https://raw.githubusercontent.com/jboss-openshift/application-templates/master/secrets/sso-app-secret.json -n apicurio
@@ -62,7 +62,7 @@ Login to SSO and import the apicurio realm
 Login to Apicurio Studio using `demo/demo`
 
 ```
-http://apicurio-apicurio.apps.ocp-dev.hbs.net.au/studio
+http://apicurio-apicurio.apps.example.com/studio
 ```
 
 ### Setup this repository from scratch
@@ -83,9 +83,6 @@ Extract and copy standalone/deployment war files and standalone-apicurio.xml con
 openshift/
 ├── apicurio-local-realm.json
 ├── configuration
-│   ├── application-roles.properties
-│   ├── application-users.properties
-│   ├── standalone-openshift-mike-local.xml
 │   └── standalone-openshift.xml
 ├── dbscripts
 │   ├── hub_mysql5.ddl
